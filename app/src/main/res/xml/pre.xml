@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <CheckBoxPreference
+        android:key="key_block_non_phone"
+        android:defaultValue="true"
+        android:title="屏蔽非普通手机号码（长度非 11 位）"></CheckBoxPreference>
+    <EditTextPreference android:title="添加屏蔽号码 （每个号码一行）"
+        android:key="key_numbers"
+        ></EditTextPreference>
+</PreferenceScreen>
