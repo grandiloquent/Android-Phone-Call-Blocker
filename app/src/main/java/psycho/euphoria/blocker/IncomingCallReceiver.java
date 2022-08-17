@@ -24,16 +24,20 @@ public class IncomingCallReceiver extends BroadcastReceiver {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean blocked = preferences
                 .getBoolean("key_block_non_phone", true);
-        String numbers =preferences.getString("key_numbers","");
+        boolean blockedAll = preferences
+                .getBoolean("key_block_all_phone", true);
+        String numbers = preferences.getString("key_numbers", "");
         try {
             String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
             String number = intent.getExtras().getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
             if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
                 try {
                     if (number != null) {
-                        if (blocked && number.length() != 11)
+                        if (blockedAll && !Arrays.stream(numbers.split("\n")).anyMatch(x -> x.trim().equals(number))) {
                             stopCall(context);
-                        if (Arrays.stream(numbers.split("\n")).anyMatch(x->x.trim().equals(number)))
+                        } else if (blocked && number.length() != 11)
+                            stopCall(context);
+                        else if (Arrays.stream(numbers.split("\n")).anyMatch(x -> x.trim().equals(number)))
                             stopCall(context);
                     }
 

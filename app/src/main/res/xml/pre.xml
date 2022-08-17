@@ -4,8 +4,13 @@
     <CheckBoxPreference
         android:key="key_block_non_phone"
         android:defaultValue="true"
-        android:title="屏蔽非普通手机号码（长度非 11 位）"></CheckBoxPreference>
-    <EditTextPreference android:title="添加屏蔽号码 （每个号码一行）"
+        android:title="拦截电话号码（长度非 11 位）"></CheckBoxPreference>
+    <CheckBoxPreference
+        android:key="key_block_all_phone"
+        android:defaultValue="false"
+        android:title="拦截所有号码"></CheckBoxPreference>
+    <EditTextPreference android:title="拦截或允许的号码"
+        android:contentDescription="一个号码一行；当拦截所有号码时，输入的号码将被允许接听，反之，将被拦截。"
         android:key="key_numbers"
         ></EditTextPreference>
 </PreferenceScreen>
